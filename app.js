@@ -317,7 +317,7 @@ limaStore.allCookies = function(){
 
 };
 
-// render info from Tokyo store on the sales page
+// render info from Lima store on the sales page
 limaStore.renderToPage = function () {
   // 1. find target
   var targetULEl = document.getElementById('lima');

@@ -112,31 +112,36 @@ function renderTableFooter(hoursArray, arrayStores, tableID){
 
   //  find target
   var tableToTarget = document.getElementById(tableID);
-  
+
   var newTrEl = document.createElement('tr');
   var newTdEl = document.createElement('td');
+  newTdEl.textContent='Totals';
+  newTrEl.appendChild(newTdEl);
 
   // / sum of the cookies bought per hour for each store
   // in the cookiesBoughtPerHour array in each store object
-  var cookiesNum = 0;
-  var dailyTotalCookies = 0;
-  var j = 0;
-  for(var i = 0; i < arrayStores.length; i++){//THIS IS BROKEN; NEED TO WORK ON LOGIC; GETTING CLOSE -for each hour in the hoursArry,
-    var c = 0;
-    while(c < hoursArray.length){
-      cookiesNum = cookiesNum + arrayStores[i].cookiesBoughtPerHour[j];
+
+
+  var store = 0;
+  var hour = 0;
+
+
+  while (hour < hoursArray.length){
+    var cookiesNum = 0;
+    for (var store = 0; store < arrayStores.length; store++){
+      cookiesNum = cookiesNum + arrayStores[store].cookiesBoughtPerHour[hour];
       // debugger;
-      newTdEl = document.createElement('td');
-      newTdEl.textContent = cookiesNum;
-      newTrEl.appendChild(newTdEl);
-      j++;
-      c++;
     }
+    newTdEl = document.createElement('td');
+    newTdEl.textContent = cookiesNum;
+    newTrEl.appendChild(newTdEl);
+    hour++;
   }
 
+  var dailyTotalCookies = 0;
   // sum of the total daily sales for each store
   // in the totalCookies variable for each store
-  for (i = 0; i < arrayStores.length; i++) {
+  for (var i = 0; i < arrayStores.length; i++) {
     dailyTotalCookies = dailyTotalCookies + arrayStores[i].totalCookies;
   }
   newTdEl = document.createElement('td');
@@ -158,7 +163,7 @@ var limaStore = new Store('Lima', 2, 16, 4.6, typicalHours);
 var storesOnTable = [seattleStore, tokyoStore, dubaiStore, parisStore, limaStore];
 renderTableHeader(typicalHours, 'store-sales');
 renderTableRows(storesOnTable);
-// renderTableFooter(typicalHours, storesOnTable, 'store-sales');
+renderTableFooter(typicalHours, storesOnTable, 'store-sales');
 
 
 

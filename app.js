@@ -1,344 +1,191 @@
 'use strict';
 
-// Object literal for each location (start with the first two)
-
-// Function customersPerHour - random number of customer per hour between the min and max, need to feed min and max in as parameters
-
-// Function cookiesPurchasedPerHour - calculate the number of cookies purchased per hour using the average cookies per customer and the amount of cookies purchased per hour
-
-// Seattle (object)
-// 	Location Name - provided
-// 	Minimum Hourly Customers - number provided
-// 	Maximum Hourly Customers - number provided
-// 	Average Cookies per Customer - number provided
-//  Store hours - provided
-// 	Amount of Cookies purchased per hour: calculate and store here as an array - using the customersPerHour function
-// 	Total Number of Cookies: add all the values in the Amount of Cookies purchased per hour array
+// Create objects for each of the stores
+// Calculate expected hourly sales for the stores
+// Put the information in a table on the sales.html page
 
 
-// Display location name on the page, then put amount of cookies per day in the list with Total number of cookies at the bottom of the list;
+var typicalHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];//regular store hours for all stores
 
-// Do this for each of the location objects
+function getRandomNum(min, max){//gets a random number between the min and max number inclusive
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  var randomNumber = Math.floor(Math.random() * (max - min +1)) + min;
+  return randomNumber;
+}
 
-var typicalHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-
-// ============================================= Seattle Store =========================================================
-var seattleStore  = {
-  minCustHr : 23,
-  maxCustHr : 65,
-  avgCookiesPerCustomer : 6.3,
-  storeHours : typicalHours,
-  custPerHour: [],
-  cookiesBoughtPerHour : [],
-  totalCookies : 0
-};
+function Store(location, minHourlyCustomers, maxHourlyCustomers, avgCookiesPerCustomer, storeHours){
+  this.location = location;
+  this.minCustHr = minHourlyCustomers;
+  this.maxCustHr = maxHourlyCustomers;
+  this.avgCookiesPerCustomer = avgCookiesPerCustomer;
+  this.storeHours = storeHours;
+  this.custPerHour = [];
+  this.cookiesBoughtPerHour = [];
+  this.totalCookies = 0;
+}
 
 
-seattleStore.customersPerHour = function(){//get a random number of customer for each hour the store is open
-  var min = this.minCustHr;
-  var max = this.maxCustHr;
+Store.prototype.customersPerHour = function(){//get the number of customers for each hour the store is open
   for (var i = 0; i < this.storeHours.length; i++) {
-    var custCount = Math.floor(Math.random() * (max - min +1)) + min;//gets a random number between the min number and max number of customers inclusive
+    var custCount = getRandomNum(this.minCustHr, this.maxCustHr);
     this.custPerHour.push(custCount);
   }
 };
 
-seattleStore.cookiesPerHour = function(){//get the number of cookies purchased per hour using the customers per hour
-
+Store.prototype.cookiesPerHour = function(){//get the number of cookies sold per hour based on the number of customers in the store
   for (var i = 0; i < this.custPerHour.length; i++) {
     var cookiesBought = this.custPerHour[i] * this.avgCookiesPerCustomer;
     this.cookiesBoughtPerHour.push(Math.round(cookiesBought));
   }
 };
 
-seattleStore.allCookies = function(){
-
+Store.prototype.allCookies = function(){//totals the cookies sold during all the store hours
   for (var i = 0; i < this.cookiesBoughtPerHour.length; i++) {
     this.totalCookies = this.totalCookies + this.cookiesBoughtPerHour[i];
   }
-
 };
 
-// render info from Seattle store on the sales page
-seattleStore.renderToPage = function () {
+Store.prototype.renderToPage = function(){
+  // run functions to get the info needed for each store to report in the table
+  this.customersPerHour();
+  this.cookiesPerHour();
+  this.allCookies();
   // 1. find target
-  var targetULEl = document.getElementById('seattle');
+  var tableToTarget = document.getElementById('store-sales');
 
   // 2. create content
+  //  need a tr, with tds for the location, sales each hour and daily total sales, then need a totals row
 
-  for (var i =0; i < this.storeHours.length; i++){
-    //    a. li
-    var newLiEl = document.createElement('li');//create content
-    //    b. text
-    var cookieSalesText = this.storeHours[i] +': ' + this.cookiesBoughtPerHour[i] + ' cookies';
-    newLiEl.textContent = cookieSalesText;
-    // 3. append to target
-    targetULEl.appendChild(newLiEl);
-  }
-  newLiEl.textContent = 'Total: ' + this.totalCookies + ' cookies';
-  targetULEl.appendChild(newLiEl);
-};
+  var newTrEl = document.createElement('tr');
+  var newTdEl = document.createElement('td');
+  newTdEl.textContent = this.location;
+  newTrEl.appendChild(newTdEl);
 
-//run functions for Seattle store
-seattleStore.customersPerHour();
-seattleStore.cookiesPerHour();
-seattleStore.allCookies();
-seattleStore.renderToPage();
-
-// ============================================= Tokyo Store =========================================================
-
-var tokyoStore  = {
-  minCustHr : 3,
-  maxCustHr : 24,
-  avgCookiesPerCustomer : 1.2,
-  storeHours : typicalHours,
-  custPerHour: [],
-  cookiesBoughtPerHour : [],
-  totalCookies : 0
-};
-
-
-tokyoStore.customersPerHour = function(){//get a random number of customer for each hour the store is open
-  var min = this.minCustHr;
-  var max = this.maxCustHr;
-  for (var i = 0; i < this.storeHours.length; i++) {
-    var custCount = Math.floor(Math.random() * (max - min +1)) + min;//gets a random number between the min number and max number of customers inclusive
-    this.custPerHour.push(custCount);
-  }
-};
-
-tokyoStore.cookiesPerHour = function(){//get the number of cookies purchased per hour using the customers per hour
-
-  for (var i = 0; i < this.custPerHour.length; i++) {
-    var cookiesBought = this.custPerHour[i] * this.avgCookiesPerCustomer;
-    this.cookiesBoughtPerHour.push(Math.round(cookiesBought));
-  }
-};
-
-tokyoStore.allCookies = function(){
-
-  for (var i = 0; i < this.cookiesBoughtPerHour.length; i++) {
-    this.totalCookies = this.totalCookies + this.cookiesBoughtPerHour[i];
+  for (var i = 0; i < this.storeHours.length; i++){
+    newTdEl = document.createElement('td');
+    newTdEl.textContent = this.cookiesBoughtPerHour[i];
+    newTrEl.appendChild(newTdEl);
   }
 
-};
+  newTdEl = document.createElement('td');
+  newTdEl.textContent = this.totalCookies;
+  newTrEl.appendChild(newTdEl);
 
-// render info from Tokyo store on the sales page
-tokyoStore.renderToPage = function () {
-  // 1. find target
-  var targetULEl = document.getElementById('tokyo');
-
-  // 2. create content
-
-  for (var i =0; i < this.storeHours.length; i++){
-    //    a. li
-    var newLiEl = document.createElement('li');//create content
-    //    b. text
-    var cookieSalesText = this.storeHours[i] +': ' + this.cookiesBoughtPerHour[i] + ' cookies';
-    newLiEl.textContent = cookieSalesText;
-    // 3. append to target
-    targetULEl.appendChild(newLiEl);
-  }
-  newLiEl.textContent = 'Total: ' + this.totalCookies + ' cookies';
-  targetULEl.appendChild(newLiEl);
-};
-
-//run functions for Tokyo store
-tokyoStore.customersPerHour();
-tokyoStore.cookiesPerHour();
-tokyoStore.allCookies();
-tokyoStore.renderToPage();
-
-
-// ============================================= Dubai Store =========================================================
-
-var dubaiStore  = {
-  minCustHr : 3,
-  maxCustHr : 24,
-  avgCookiesPerCustomer : 1.2,
-  storeHours : typicalHours,
-  custPerHour: [],
-  cookiesBoughtPerHour : [],
-  totalCookies : 0
+  // append content to the target
+  tableToTarget.appendChild(newTrEl);
 };
 
 
-dubaiStore.customersPerHour = function(){//get a random number of customer for each hour the store is open
-  var min = this.minCustHr;
-  var max = this.maxCustHr;
-  for (var i = 0; i < this.storeHours.length; i++) {
-    var custCount = Math.floor(Math.random() * (max - min +1)) + min;//gets a random number between the min number and max number of customers inclusive
-    this.custPerHour.push(custCount);
-  }
-};
 
-dubaiStore.cookiesPerHour = function(){//get the number of cookies purchased per hour using the customers per hour
+function renderTableHeader(hoursArray, tableID){//creates a table header including Daily Total using the table ID provided and the array of hours the store is open
+  // identify target
+  var tableToTarget = document.getElementById(tableID);
 
-  for (var i = 0; i < this.custPerHour.length; i++) {
-    var cookiesBought = this.custPerHour[i] * this.avgCookiesPerCustomer;
-    this.cookiesBoughtPerHour.push(Math.round(cookiesBought));
-  }
-};
+  // create content
+  //  a. tr, then need tds for "blank", each value in storeHours, and the "Daily Total"
+  var newTrEl = document.createElement('tr');
+  var newThEl = document.createElement('th');
+  newTrEl.appendChild(newThEl);
 
-dubaiStore.allCookies = function(){
-
-  for (var i = 0; i < this.cookiesBoughtPerHour.length; i++) {
-    this.totalCookies = this.totalCookies + this.cookiesBoughtPerHour[i];
+  for(var i = 0; i < hoursArray.length; i++){
+    newThEl = document.createElement('th');
+    newThEl.textContent = hoursArray[i];
+    newTrEl.appendChild(newThEl);
   }
 
-};
+  newThEl = document.createElement('th');
+  newThEl.textContent = 'Daily Location Total';
+  newTrEl.appendChild(newThEl);
 
-// render info from Dubai store on the sales page
-dubaiStore.renderToPage = function () {
-  // 1. find target
-  var targetULEl = document.getElementById('dubai');
+  // add content to the target
+  tableToTarget.appendChild(newTrEl);
+}
 
-  // 2. create content
-
-  for (var i =0; i < this.storeHours.length; i++){
-    //    a. li
-    var newLiEl = document.createElement('li');//create content
-    //    b. text
-    var cookieSalesText = this.storeHours[i] +': ' + this.cookiesBoughtPerHour[i] + ' cookies';
-    newLiEl.textContent = cookieSalesText;
-    // 3. append to target
-    targetULEl.appendChild(newLiEl);
+function renderTableRows(arrayStores){
+  for(var i = 0; i < arrayStores.length; i++){
+    arrayStores[i].renderToPage();
   }
-  newLiEl.textContent = 'Total: ' + this.totalCookies + ' cookies';
-  targetULEl.appendChild(newLiEl);
-};
+}
 
-//run functions for Dubai store
-dubaiStore.customersPerHour();
-dubaiStore.cookiesPerHour();
-dubaiStore.allCookies();
-dubaiStore.renderToPage();
+function renderTableFooter(hoursArray, arrayStores, tableID){
 
+  //  find target
+  var tableToTarget = document.getElementById(tableID);
+  
+  var newTrEl = document.createElement('tr');
+  var newTdEl = document.createElement('td');
 
-// ============================================= Paris Store =========================================================
-
-var parisStore  = {
-  minCustHr : 3,
-  maxCustHr : 24,
-  avgCookiesPerCustomer : 1.2,
-  storeHours : typicalHours,
-  custPerHour: [],
-  cookiesBoughtPerHour : [],
-  totalCookies : 0
-};
-
-
-parisStore.customersPerHour = function(){//get a random number of customer for each hour the store is open
-  var min = this.minCustHr;
-  var max = this.maxCustHr;
-  for (var i = 0; i < this.storeHours.length; i++) {
-    var custCount = Math.floor(Math.random() * (max - min +1)) + min;//gets a random number between the min number and max number of customers inclusive
-    this.custPerHour.push(custCount);
-  }
-};
-
-parisStore.cookiesPerHour = function(){//get the number of cookies purchased per hour using the customers per hour
-
-  for (var i = 0; i < this.custPerHour.length; i++) {
-    var cookiesBought = this.custPerHour[i] * this.avgCookiesPerCustomer;
-    this.cookiesBoughtPerHour.push(Math.round(cookiesBought));
-  }
-};
-
-parisStore.allCookies = function(){
-
-  for (var i = 0; i < this.cookiesBoughtPerHour.length; i++) {
-    this.totalCookies = this.totalCookies + this.cookiesBoughtPerHour[i];
+  // / sum of the cookies bought per hour for each store
+  // in the cookiesBoughtPerHour array in each store object
+  var cookiesNum = 0;
+  var dailyTotalCookies = 0;
+  var j = 0;
+  for(var i = 0; i < arrayStores.length; i++){//THIS IS BROKEN; NEED TO WORK ON LOGIC; GETTING CLOSE -for each hour in the hoursArry,
+    var c = 0;
+    while(c < hoursArray.length){
+      cookiesNum = cookiesNum + arrayStores[i].cookiesBoughtPerHour[j];
+      // debugger;
+      newTdEl = document.createElement('td');
+      newTdEl.textContent = cookiesNum;
+      newTrEl.appendChild(newTdEl);
+      j++;
+      c++;
+    }
   }
 
-};
-
-// render info from Paris store on the sales page
-parisStore.renderToPage = function () {
-  // 1. find target
-  var targetULEl = document.getElementById('paris');
-
-  // 2. create content
-
-  for (var i =0; i < this.storeHours.length; i++){
-    //    a. li
-    var newLiEl = document.createElement('li');//create content
-    //    b. text
-    var cookieSalesText = this.storeHours[i] +': ' + this.cookiesBoughtPerHour[i] + ' cookies';
-    newLiEl.textContent = cookieSalesText;
-    // 3. append to target
-    targetULEl.appendChild(newLiEl);
+  // sum of the total daily sales for each store
+  // in the totalCookies variable for each store
+  for (i = 0; i < arrayStores.length; i++) {
+    dailyTotalCookies = dailyTotalCookies + arrayStores[i].totalCookies;
   }
-  newLiEl.textContent = 'Total: ' + this.totalCookies + ' cookies';
-  targetULEl.appendChild(newLiEl);
-};
-
-//run functions for Paris store
-parisStore.customersPerHour();
-parisStore.cookiesPerHour();
-parisStore.allCookies();
-parisStore.renderToPage();
-
-// ============================================= Lima Store =========================================================
-
-var limaStore  = {
-  minCustHr : 3,
-  maxCustHr : 24,
-  avgCookiesPerCustomer : 1.2,
-  storeHours : typicalHours,
-  custPerHour: [],
-  cookiesBoughtPerHour : [],
-  totalCookies : 0
-};
+  newTdEl = document.createElement('td');
+  newTdEl.textContent = dailyTotalCookies;
+  newTrEl.appendChild(newTdEl);
 
 
-limaStore.customersPerHour = function(){//get a random number of customer for each hour the store is open
-  var min = this.minCustHr;
-  var max = this.maxCustHr;
-  for (var i = 0; i < this.storeHours.length; i++) {
-    var custCount = Math.floor(Math.random() * (max - min +1)) + min;//gets a random number between the min number and max number of customers inclusive
-    this.custPerHour.push(custCount);
-  }
-};
+  tableToTarget.appendChild(newTrEl);
+}
 
-limaStore.cookiesPerHour = function(){//get the number of cookies purchased per hour using the customers per hour
+// ============================================= Stores =========================================================
+var seattleStore = new Store('Seattle', 23, 65, 6.3, typicalHours);
+var tokyoStore = new Store('Tokyo', 3, 24, 1.2, typicalHours);
+var dubaiStore = new Store('Dubai', 11, 38, 3.7, typicalHours);
+var parisStore = new Store('Paris', 20, 38, 2.3, typicalHours);
+var limaStore = new Store('Lima', 2, 16, 4.6, typicalHours);
 
-  for (var i = 0; i < this.custPerHour.length; i++) {
-    var cookiesBought = this.custPerHour[i] * this.avgCookiesPerCustomer;
-    this.cookiesBoughtPerHour.push(Math.round(cookiesBought));
-  }
-};
+// ============================================= Sales Table =========================================================
+var storesOnTable = [seattleStore, tokyoStore, dubaiStore, parisStore, limaStore];
+renderTableHeader(typicalHours, 'store-sales');
+renderTableRows(storesOnTable);
+// renderTableFooter(typicalHours, storesOnTable, 'store-sales');
 
-limaStore.allCookies = function(){
 
-  for (var i = 0; i < this.cookiesBoughtPerHour.length; i++) {
-    this.totalCookies = this.totalCookies + this.cookiesBoughtPerHour[i];
-  }
 
-};
 
-// render info from Lima store on the sales page
-limaStore.renderToPage = function () {
-  // 1. find target
-  var targetULEl = document.getElementById('lima');
 
-  // 2. create content
 
-  for (var i =0; i < this.storeHours.length; i++){
-    //    a. li
-    var newLiEl = document.createElement('li');//create content
-    //    b. text
-    var cookieSalesText = this.storeHours[i] +': ' + this.cookiesBoughtPerHour[i] + ' cookies';
-    newLiEl.textContent = cookieSalesText;
-    // 3. append to target
-    targetULEl.appendChild(newLiEl);
-  }
-  newLiEl.textContent = 'Total: ' + this.totalCookies + ' cookies';
-  targetULEl.appendChild(newLiEl);
-};
 
-//run functions for Lima store
-limaStore.customersPerHour();
-limaStore.cookiesPerHour();
-limaStore.allCookies();
-limaStore.renderToPage();
+
+// // ============================================= Seattle Store =========================================================
+
+// var seattleStore = new Store('Seattle', 23, 65, 6.3, typicalHours);
+// seattleStore.renderToPage();
+
+// // ============================================= Tokyo Store =========================================================
+
+// var tokyoStore = new Store('Tokyo', 3, 24, 1.2, typicalHours);
+// tokyoStore.renderToPage();
+
+// // ============================================= Dubai Store =========================================================
+// var dubaiStore = new Store('Dubai', 11, 38, 3.7, typicalHours);
+// dubaiStore.renderToPage();
+
+// // ============================================= Paris Store =========================================================
+// var parisStore = new Store('Paris', 20, 38, 2.3, typicalHours);
+// parisStore.renderToPage();
+
+// // ============================================= Lima Store =========================================================
+// var limaStore = new Store('Lima', 2, 16, 4.6, typicalHours);
+// limaStore.renderToPage();
+

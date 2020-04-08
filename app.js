@@ -46,71 +46,146 @@ Store.prototype.allCookies = function(){//totals the cookies sold during all the
   }
 };
 
-// Store.prototype.renderToPage = function(locationID){//locationID is the id for the store heading; for example 'seattle'
-//   // run functions to get the info needed to report in the table
-//   this.customersPerHour();
-//   this.cookiesPerHour();
-//   this.allCookies();
-//   // 1. find target
-//   var targetULEl = document.getElementById(locationID);
-
-//   // 2. create content
-
-//   for (var i =0; i < this.storeHours.length; i++){
-//     //    a. li
-//     var newLiEl = document.createElement('li');//create content
-//     //    b. text
-//     var cookieSalesText = this.storeHours[i] +': ' + this.cookiesBoughtPerHour[i] + ' cookies';
-//     newLiEl.textContent = cookieSalesText;
-//     // 3. append to target
-//     targetULEl.appendChild(newLiEl);
-//   }
-//   newLiEl.textContent = 'Total: ' + this.totalCookies + ' cookies';
-//   targetULEl.appendChild(newLiEl);
-// };
-
-Store.prototype.renderToPage = function(locationID){//locationID is the id for the store heading; for example 'seattle'
-  // run functions to get the info needed to report in the table
+Store.prototype.renderToPage = function(){
+  // run functions to get the info needed for each store to report in the table
   this.customersPerHour();
   this.cookiesPerHour();
   this.allCookies();
   // 1. find target
-  var targetULEl = document.getElementById(locationID);
+  var tableToTarget = document.getElementById('store-sales');
 
   // 2. create content
+  //  need a tr, with tds for the location, sales each hour and daily total sales, then need a totals row
 
-  for (var i =0; i < this.storeHours.length; i++){
-    //    a. li
-    var newLiEl = document.createElement('li');//create content
-    //    b. text
-    var cookieSalesText = this.storeHours[i] +': ' + this.cookiesBoughtPerHour[i] + ' cookies';
-    newLiEl.textContent = cookieSalesText;
-    // 3. append to target
-    targetULEl.appendChild(newLiEl);
+  var newTrEl = document.createElement('tr');
+  var newTdEl = document.createElement('td');
+  newTdEl.textContent = this.location;
+  newTrEl.appendChild(newTdEl);
+
+  for (var i = 0; i < this.storeHours.length; i++){
+    newTdEl = document.createElement('td');
+    newTdEl.textContent = this.cookiesBoughtPerHour[i];
+    newTrEl.appendChild(newTdEl);
   }
-  newLiEl.textContent = 'Total: ' + this.totalCookies + ' cookies';
-  targetULEl.appendChild(newLiEl);
+
+  newTdEl = document.createElement('td');
+  newTdEl.textContent = this.totalCookies;
+  newTrEl.appendChild(newTdEl);
+
+  // append content to the target
+  tableToTarget.appendChild(newTrEl);
 };
 
-// ============================================= Seattle Store =========================================================
 
+
+function renderTableHeader(hoursArray, tableID){//creates a table header including Daily Total using the table ID provided and the array of hours the store is open
+  // identify target
+  var tableToTarget = document.getElementById(tableID);
+
+  // create content
+  //  a. tr, then need tds for "blank", each value in storeHours, and the "Daily Total"
+  var newTrEl = document.createElement('tr');
+  var newThEl = document.createElement('th');
+  newTrEl.appendChild(newThEl);
+
+  for(var i = 0; i < hoursArray.length; i++){
+    newThEl = document.createElement('th');
+    newThEl.textContent = hoursArray[i];
+    newTrEl.appendChild(newThEl);
+  }
+
+  newThEl = document.createElement('th');
+  newThEl.textContent = 'Daily Location Total';
+  newTrEl.appendChild(newThEl);
+
+  // add content to the target
+  tableToTarget.appendChild(newTrEl);
+}
+
+function renderTableRows(arrayStores){
+  for(var i = 0; i < arrayStores.length; i++){
+    arrayStores[i].renderToPage();
+  }
+}
+
+function renderTableFooter(hoursArray, arrayStores, tableID){
+
+  //  find target
+  var tableToTarget = document.getElementById(tableID);
+  
+  var newTrEl = document.createElement('tr');
+  var newTdEl = document.createElement('td');
+
+  // / sum of the cookies bought per hour for each store
+  // in the cookiesBoughtPerHour array in each store object
+  var cookiesNum = 0;
+  var dailyTotalCookies = 0;
+  var j = 0;
+  for(var i = 0; i < arrayStores.length; i++){//THIS IS BROKEN; NEED TO WORK ON LOGIC; GETTING CLOSE -for each hour in the hoursArry,
+    var c = 0;
+    while(c < hoursArray.length){
+      cookiesNum = cookiesNum + arrayStores[i].cookiesBoughtPerHour[j];
+      // debugger;
+      newTdEl = document.createElement('td');
+      newTdEl.textContent = cookiesNum;
+      newTrEl.appendChild(newTdEl);
+      j++;
+      c++;
+    }
+  }
+
+  // sum of the total daily sales for each store
+  // in the totalCookies variable for each store
+  for (i = 0; i < arrayStores.length; i++) {
+    dailyTotalCookies = dailyTotalCookies + arrayStores[i].totalCookies;
+  }
+  newTdEl = document.createElement('td');
+  newTdEl.textContent = dailyTotalCookies;
+  newTrEl.appendChild(newTdEl);
+
+
+  tableToTarget.appendChild(newTrEl);
+}
+
+// ============================================= Stores =========================================================
 var seattleStore = new Store('Seattle', 23, 65, 6.3, typicalHours);
-seattleStore.renderToPage('seattle');
-
-// ============================================= Tokyo Store =========================================================
-
 var tokyoStore = new Store('Tokyo', 3, 24, 1.2, typicalHours);
-tokyoStore.renderToPage('tokyo');
-
-// ============================================= Dubai Store =========================================================
 var dubaiStore = new Store('Dubai', 11, 38, 3.7, typicalHours);
-dubaiStore.renderToPage('dubai');
-
-// ============================================= Paris Store =========================================================
 var parisStore = new Store('Paris', 20, 38, 2.3, typicalHours);
-parisStore.renderToPage('paris');
-
-// ============================================= Lima Store =========================================================
 var limaStore = new Store('Lima', 2, 16, 4.6, typicalHours);
-limaStore.renderToPage('lima');
+
+// ============================================= Sales Table =========================================================
+var storesOnTable = [seattleStore, tokyoStore, dubaiStore, parisStore, limaStore];
+renderTableHeader(typicalHours, 'store-sales');
+renderTableRows(storesOnTable);
+// renderTableFooter(typicalHours, storesOnTable, 'store-sales');
+
+
+
+
+
+
+
+
+// // ============================================= Seattle Store =========================================================
+
+// var seattleStore = new Store('Seattle', 23, 65, 6.3, typicalHours);
+// seattleStore.renderToPage();
+
+// // ============================================= Tokyo Store =========================================================
+
+// var tokyoStore = new Store('Tokyo', 3, 24, 1.2, typicalHours);
+// tokyoStore.renderToPage();
+
+// // ============================================= Dubai Store =========================================================
+// var dubaiStore = new Store('Dubai', 11, 38, 3.7, typicalHours);
+// dubaiStore.renderToPage();
+
+// // ============================================= Paris Store =========================================================
+// var parisStore = new Store('Paris', 20, 38, 2.3, typicalHours);
+// parisStore.renderToPage();
+
+// // ============================================= Lima Store =========================================================
+// var limaStore = new Store('Lima', 2, 16, 4.6, typicalHours);
+// limaStore.renderToPage();
 

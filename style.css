@@ -1,3 +1,12 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: black solid 1px;
+}

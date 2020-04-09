@@ -4,21 +4,97 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pat's Salmon Cookies</title>
+  <link rel="stylesheet" type="text/css" href="reset.css">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
   <!-- using some inline styles for now - will use stylesheet later -->
   <header>
+    <!--add a background color; add a tagline;  -->
     <h1 style="font-size: 40px; text-align: center">Pat's Salmon Cookies</h1>
     <p style="text-align: center"><img src="images/salmon_logo.png" alt="salmon" height="50px";></p>
   </header>
   <main>
+    <nav class = "navbar">
+      <ul>
+       <li><a class="active" href="index.html">Home</a></li>
+       <li><a href="sales.html">Sales</a></li>
+      </ul>
+    </nav>
         
-    <p style="text-align: center; color: orangered; font-weight: bold; padding-top: 200px; font-size: 40px;">Coming Soon!</p>
-    <!-- <p style="text-align: center;"><a href="sales.html/">Visit our Sales Page</a></p> -->
+         
+    <!-- make sections for each store that includes address, put google map for address, hours, and contact info, include a picture -->
+    <section class="stores">
+      <article>
+        <h2>Seattle</h2>
+        <img src="images/chinook.jpg" alt="Seattle">
+        <h3>Hours</h3>
+        <p>6am - 7pm every day</p>
+        <h3>Address</h3>
+        <p>500 Pine Street, Suite 200</p>
+        <p>Seattle, Washington 98101</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.7041449376466!2d-122.3385708843114!3d47.61244219556761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906ab4b6dc365b%3A0x2e41b8b615e6f88f!2s500%20Pine%20St%2C%20Seattle%2C%20WA%2098101!5e0!3m2!1sen!2sus!4v1586391232926!5m2!1sen!2sus" ></iframe>
+        <h3>Phone</h3>
+        <p>+1.555.555.5555</p>
+      </article>
+      <article>
+        <h2>Tokyo</h2>
+        <img src="images/cutter.jpeg" alt="Tokyo">
+        <h3>Hours</h3>
+        <p>6am - 7pm every day</p>
+        <h3>Address</h3>
+        <p>5-7-5, Jingumae</p>
+        <p>150-0001 Shibuya-ku - Japan</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.4276860341224!2d139.70686311539117!3d35.66646973838856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ca1a013c4fd%3A0x25b8d1ac1018c5a3!2s5-ch%C5%8Dme-7-5%20Jing%C5%ABmae%2C%20Shibuya%20City%2C%20T%C5%8Dky%C5%8D-to%20150-0001%2C%20Japan!5e0!3m2!1sen!2sus!4v1586391305793!5m2!1sen!2sus"></iframe>
+        <h3>Phone</h3>
+        <p>5555-555555</p>
+      </article>
+      <article>
+        <h2>Dubai</h2>
+        <img src="images/family.jpg" alt="Dubai">
+        <h3>Hours</h3>
+        <p>6am - 7pm every day</p>
+        <h3>Address</h3>
+        <p>The Dubai Mall, Level 1</p>
+        <p>Dubai - United Arab Emirates</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1713652434933!2d55.27730921520319!3d25.197442837873567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682829c85c07%3A0xa5eda9fb3c93b69d!2sThe%20Dubai%20Mall!5e0!3m2!1sen!2sus!4v1586390851191!5m2!1sen!2sus"></iframe>
+        <h3>Phone</h3>
+        <p>+555 5 555 5555555</p>
+      </article>
+      <article>
+        <h2>Paris</h2>
+        <img src="images/shirt.jpg" alt="Paris">
+        <h3>Hours</h3>
+        <p>6am - 7pm every day</p>
+        <h3>Address</h3>
+        <p>101, avenue des Champs-Élysées</p>
+        <p>75008 Paris - France</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.304304913216!2d2.2980822157247025!3d48.87147520773924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fe9e4e55555%3A0x7b950b981baf2893!2s101%20Av.%20des%20Champs-%C3%89lys%C3%A9es%2C%2075008%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1586391473814!5m2!1sen!2sus" ></iframe>
+        <h3>Phone</h3>
+        <p>+55 5 55 55 55 55</p>
+      </article>
+      <article>
+        <h2>Lima</h2>
+        <img src="images/frosted-cookie.jpg" alt="Lima">
+        <h3>Hours</h3>
+        <p>6am - 7pm every day</p>
+        <h3>Address</h3>
+        <p>Malecón de la Reserva 615</p>
+        <p>Miraflores 15074, Peru</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.714665315411!2d-77.03160308518657!3d-12.131664991410743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b7e1bf6a7c23%3A0x1b6847057b22afe9!2sMalec%C3%B3n%20de%20la%20Reserva%20615%2C%20Miraflores%2015074%2C%20Peru!5e0!3m2!1sen!2sus!4v1586391814005!5m2!1sen!2sus"></iframe>
+        <h3>Phone</h3>
+        <p>+55 5 5555555</p>
+      </article>
+    </section>
+    
+    
 
 
   </main>
+  <!-- make a footer with the name and copyright -->
+  <footer>
+    <p>&copy Pat's Salmon Cookies 2020</p>
+  </footer>
   
 </body>
 </html>

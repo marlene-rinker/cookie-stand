@@ -192,16 +192,10 @@ function handleLocation (e){
   var locationMaxCustomers = theForm.maxCustomers.value;
   var locationAvgCookiesSold = theForm.avgCookiesSold.value;
 
-  console.log('location is ' + location);
-  console.log('minimum customers is ' + locationMinCustomers);
-  console.log('maximum customers is ' + locationMaxCustomers);
-  console.log('avg cookies sold is ' + locationAvgCookiesSold);
-
-  console.log('stores on table before adding: ' +storesOnTable);
 
 
   storesOnTable.push(new Store(location, parseInt(locationMinCustomers), parseInt(locationMaxCustomers), parseFloat(locationAvgCookiesSold), typicalHours));
-  console.log('storesOnTable after adding ' + storesOnTable);
+
 
   var theTable = document.getElementById('store-sales');
   theTable.innerHTML = '';

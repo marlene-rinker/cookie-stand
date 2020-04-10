@@ -23,7 +23,33 @@
 
     <p class = "warning">Under Construction</p>
 
-    <section class="stores">  
+    <section id="addStoreForm">
+      
+      <form id = "cookie-stand">
+        <fieldset>
+          <legend><h3>Add a Store</h3></legend>
+
+          <label for="location">Location</label>
+          <input type="text" name="location">
+
+          <label for="minCustomers">Minimum Number of Customers Per Hour</label>
+          <input type="text" name="minCustomers">
+
+          <label for="maxCustomers">Maximum Number of Customers Per Hour</label>
+          <input type="text" name="maxCustomers">
+
+          <label for="avgCookiesSold">Average Number of Cookies Purchased Per Customer Per Hour</label>
+          <input type="text" name=avgCookiesSold>
+
+          <button type="submit">Add Store</button>
+
+        </fieldset>
+
+      </form>
+
+    </section>
+
+    <section class="store-sales">  
       <article>
       <h2>Sales Table</h2>
       <table id="store-sales"></table>

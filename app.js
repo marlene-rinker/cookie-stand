@@ -22,7 +22,7 @@ function Store(location, minHourlyCustomers, maxHourlyCustomers, avgCookiesPerCu
   this.storeHours = storeHours;
   this.custPerHour = [];
   this.cookiesBoughtPerHour = [];
-  this.totalCookies = 0;
+  this.totalCookies;
 }
 
 
@@ -41,6 +41,7 @@ Store.prototype.cookiesPerHour = function(){//get the number of cookies sold per
 };
 
 Store.prototype.allCookies = function(){//totals the cookies sold during all the store hours
+  this.totalCookies = 0;
   for (var i = 0; i < this.cookiesBoughtPerHour.length; i++) {
     this.totalCookies = this.totalCookies + this.cookiesBoughtPerHour[i];
   }
@@ -48,9 +49,15 @@ Store.prototype.allCookies = function(){//totals the cookies sold during all the
 
 Store.prototype.renderToPage = function(){
   // run functions to get the info needed for each store to report in the table
-  this.customersPerHour();
-  this.cookiesPerHour();
-  this.allCookies();
+  if (this.custPerHour.length < 1){
+    this.customersPerHour();
+  }
+  if (this.cookiesBoughtPerHour.length < 1){
+    this.cookiesPerHour();
+  }
+  if (!this.totalCookies){
+    this.allCookies();
+  }
   // 1. find target
   var tableToTarget = document.getElementById('store-sales');
 
@@ -128,9 +135,9 @@ function renderTableFooter(hoursArray, arrayStores, tableID){
 
   while (hour < hoursArray.length){
     var cookiesNum = 0;
-    for (var store = 0; store < arrayStores.length; store++){
+    for (store = 0; store < arrayStores.length; store++){
       cookiesNum = cookiesNum + arrayStores[store].cookiesBoughtPerHour[hour];
-      // debugger;
+
     }
     newTdEl = document.createElement('td');
     newTdEl.textContent = cookiesNum;
@@ -159,6 +166,7 @@ var dubaiStore = new Store('Dubai', 11, 38, 3.7, typicalHours);
 var parisStore = new Store('Paris', 20, 38, 2.3, typicalHours);
 var limaStore = new Store('Lima', 2, 16, 4.6, typicalHours);
 
+
 // ============================================= Sales Table =========================================================
 var storesOnTable = [seattleStore, tokyoStore, dubaiStore, parisStore, limaStore];
 renderTableHeader(typicalHours, 'store-sales');
@@ -168,29 +176,47 @@ renderTableFooter(typicalHours, storesOnTable, 'store-sales');
 
 
 
+// ============================================= Add a Store =========================================================
+// adds a store and puts it on the sales table
+
+// 1. find the target
+var locationForm = document.getElementById('cookie-stand');
+
+// 2. attach a callback function
+function handleLocation (e){
+  e.preventDefault();
+
+  var theForm = e.target;
+  var location = theForm.location.value;
+  var locationMinCustomers = theForm.minCustomers.value;
+  var locationMaxCustomers = theForm.maxCustomers.value;
+  var locationAvgCookiesSold = theForm.avgCookiesSold.value;
+
+  console.log('location is ' + location);
+  console.log('minimum customers is ' + locationMinCustomers);
+  console.log('maximum customers is ' + locationMaxCustomers);
+  console.log('avg cookies sold is ' + locationAvgCookiesSold);
+
+  console.log('stores on table before adding: ' +storesOnTable);
+
+
+  storesOnTable.push(new Store(location, parseInt(locationMinCustomers), parseInt(locationMaxCustomers), parseFloat(locationAvgCookiesSold), typicalHours));
+  console.log('storesOnTable after adding ' + storesOnTable);
+
+  var theTable = document.getElementById('store-sales');
+  theTable.innerHTML = '';
+
+
+  renderTableHeader(typicalHours, 'store-sales');
+  renderTableRows(storesOnTable);
+  renderTableFooter(typicalHours, storesOnTable, 'store-sales');
 
 
 
 
-// // ============================================= Seattle Store =========================================================
+  document.getElementById('cookie-stand').reset();
+}
 
-// var seattleStore = new Store('Seattle', 23, 65, 6.3, typicalHours);
-// seattleStore.renderToPage();
+locationForm.addEventListener('submit', handleLocation);
 
-// // ============================================= Tokyo Store =========================================================
-
-// var tokyoStore = new Store('Tokyo', 3, 24, 1.2, typicalHours);
-// tokyoStore.renderToPage();
-
-// // ============================================= Dubai Store =========================================================
-// var dubaiStore = new Store('Dubai', 11, 38, 3.7, typicalHours);
-// dubaiStore.renderToPage();
-
-// // ============================================= Paris Store =========================================================
-// var parisStore = new Store('Paris', 20, 38, 2.3, typicalHours);
-// parisStore.renderToPage();
-
-// // ============================================= Lima Store =========================================================
-// var limaStore = new Store('Lima', 2, 16, 4.6, typicalHours);
-// limaStore.renderToPage();
 

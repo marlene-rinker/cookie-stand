@@ -11,3 +11,4 @@ It consists of the sales projection page and the public-facing page about the bu
 ### Lab 06 - Created the website and the sales page using app.js with object literals and listing the sales per store per hour
 ### Lab 07 - Refactored the app.js to use constructor functions and put the sales info in a table, including hourly sales totals
 ### Lab 08 - Added info to index.html and updated the style
+### Lab 09 - Added a form to add stores to the Sales Table while you're viewing the page

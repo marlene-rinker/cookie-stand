@@ -43,6 +43,25 @@ header {
   color: #2d5070;
 }
 
+#addStoreForm {
+  background-color: #facb61;
+  padding: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  border-width: 5px;
+  border-color: #2d5070;
+  border-style: solid;
+}
+
+label {
+  color: #2d5070;
+  
+}
+input {
+  border-style: solid;
+  border-color: #2d5070;
+}
+
 table {
   border: 1px solid black;
   border-collapse: collapse;

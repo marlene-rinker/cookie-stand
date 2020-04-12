@@ -13,6 +13,13 @@ header {
   border-color: #2d5070;
 }
 
+main {
+  background-image: url("images/fish.jpg");
+  background-color: transparent; 
+  padding-bottom: 10px;
+  
+}
+
 .navbar {
   overflow: hidden;
   border-radius: 10px;
@@ -43,15 +50,50 @@ header {
   color: #2d5070;
 }
 
-/* #addStoreForm {
+.warning {
+  text-align: center; 
+  color: orangered; 
+  font-weight: bold; 
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+h2 {
+  font-size: 75px;
+}
+
+h3 {
+  font-size: 30px;
+  color:#2d5070;
+  padding:10px;
+}
+
+article {
   background-color: #facb61;
-  padding: 50px;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto;  
+  text-align: center;
   border-width: 5px;
   border-color: #2d5070;
   border-style: solid;
-} */
+  margin-top: 30px;
+  padding:20px;
+}
+
+.salesTable  {
+  background-color: #facb61;
+  margin-left: auto;
+  margin-right: auto;  
+  margin-top: 30px;
+  margin-bottom: 30px;
+  overflow: auto;
+  /* width: 1260px; */
+  width: 90%;
+  border-width: 5px;
+  border-color: #2d5070;
+  border-style: solid;
+  padding-bottom: 30px;
+}
 
 
 label {
@@ -62,6 +104,12 @@ input {
   border-style: solid;
   border-color: #2d5070;
   font-size: large;
+}
+
+form div {
+  height: 40px;
+  text-align: left;
+  font-size:large;
 }
 
 button {
@@ -85,11 +133,6 @@ legend {
   padding-bottom: 20px;
 }
 
-form div {
-  height: 40px;
-  text-align: left;
-  font-size:large;
-}
 
 table {
   border: 1px solid #2d5070;
@@ -112,60 +155,6 @@ tr:first-child {
   color: purple;
 }
 
-.warning {
-  text-align: center; 
-  color: orangered; 
-  font-weight: bold; 
-  font-size: 40px;
-  margin-top: 30px;
-}
-
-h2 {
-  font-size: 75px;
-}
-
-h3 {
-  font-size: 30px;
-  color:#2d5070;
-  padding:10px;
-}
-
-main {
-  background-image: url("images/fish.jpg");
-  background-color: transparent; 
-  padding-bottom: 10px;
-  
-}
-.salesTable  {
-  background-color: #facb61;
-  margin-left: auto;
-  margin-right: auto;  
-  margin-top: 30px;
-  margin-bottom: 30px;
-  overflow: auto;
-  /* width: 1260px; */
-  width: 90%;
-  border-width: 5px;
-  border-color: #2d5070;
-  border-style: solid;
-  padding-bottom: 30px;
-}
-
-
-
-
-article {
-  background-color: #facb61;
-  margin-left: auto;
-  margin-right: auto;  
-  text-align: center;
-  border-width: 5px;
-  border-color: #2d5070;
-  border-style: solid;
-  margin-top: 30px;
-  padding:20px;
-}
-
 .salesTable article{
   
   /* width: 1046px; */
@@ -173,7 +162,6 @@ article {
   width: 90%;
   
 }
-
 
 .stores article {
   width: 900px;
@@ -203,8 +191,6 @@ article {
   border-width: 5px;
   border-radius: 10px;
 }
-
-
 
 
 

@@ -13,6 +13,13 @@ header {
   border-color: #2d5070;
 }
 
+main {
+  background-image: url("images/fish.jpg");
+  background-color: transparent; 
+  padding-bottom: 10px;
+  
+}
+
 .navbar {
   overflow: hidden;
   border-radius: 10px;
@@ -43,35 +50,6 @@ header {
   color: #2d5070;
 }
 
-/* #addStoreForm {
-  background-color: #facb61;
-  padding: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  border-width: 5px;
-  border-color: #2d5070;
-  border-style: solid;
-} */
-
-
-label {
-  color: #2d5070;
-  
-}
-input {
-  border-style: solid;
-  border-color: #2d5070;
-}
-
-table {
-  border: 1px solid #2d5070;
-  border-collapse: collapse;
-}
-
-td, th {
-  border: #2d5070 solid 5px;
-}
-
 .warning {
   text-align: center; 
   color: orangered; 
@@ -90,25 +68,6 @@ h3 {
   padding:10px;
 }
 
-main {
-  background-image: url("images/fish.jpg");
-  background-color: transparent; 
-  
-}
-.salesTable  {
-  background-color: #facb61;
-  margin-left: auto;
-  margin-right: auto;  
-  width: 1260px;
-  border-width: 5px;
-  border-color: #2d5070;
-  border-style: solid;
-  padding-bottom: 30px;
-}
-
-
-
-
 article {
   background-color: #facb61;
   margin-left: auto;
@@ -121,13 +80,108 @@ article {
   padding:20px;
 }
 
+.salesTable  {
+  background-color: #facb61;
+  margin-left: auto;
+  margin-right: auto;  
+  margin-top: 30px;
+  margin-bottom: 30px;
+  overflow: auto;
+  /* width: 1260px; */
+  width: 90%;
+  border-width: 5px;
+  border-color: #2d5070;
+  border-style: solid;
+  padding-bottom: 30px;
+}
+
+
+label {
+  color: #2d5070;
+  padding-right: 10px;
+}
+input {
+  border-style: solid;
+  border-color: #2d5070;
+  font-size: large;
+}
+
+form div {
+  height: 40px;
+  text-align: left;
+  font-size:large;
+}
+
+button {
+  background-color: #2d5070;
+  color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #2d5070;
+  font-size: large;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: #ef5c29;
+}
+
+legend {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+
+table {
+  border: 1px solid #2d5070;
+  border-collapse: collapse;
+  color: #353535;
+}
+
+td, th {
+  border: #2d5070 solid 3px;
+  text-align: center;
+  padding: 20px;
+  font-size: large;
+  vertical-align: middle;
+}
+
+th {
+  background-color: grey;
+  color: #dcdcdc;
+  
+}
+
+tr:hover td {
+  background-color: #ef5c29;
+  color: #2d5070;
+}
+
+tr td:first-child {
+  color: #353535;
+  background-color: #ef5c29;
+}
+
+
+tr:hover td:first-child {
+  background-color: #2d5070;
+  color: white;
+}
+
 .salesTable article{
   
-  width: 1046px;
+  /* width: 1046px; */
+  overflow: auto;
+  width: 90%;
+  
 }
 
 .stores article {
-  width: 900px;
+  /* width: 900px; */
+  width: 42%;
+  overflow: auto;
 }
 
 .stores article p {
@@ -154,8 +208,6 @@ article {
   border-width: 5px;
   border-radius: 10px;
 }
-
-
 
 
 

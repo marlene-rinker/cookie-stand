@@ -137,6 +137,7 @@ legend {
 table {
   border: 1px solid #2d5070;
   border-collapse: collapse;
+  color: #353535;
 }
 
 td, th {
@@ -144,15 +145,29 @@ td, th {
   text-align: center;
   padding: 20px;
   font-size: large;
+  vertical-align: middle;
 }
 
 th {
-  background-color: #dcdcdc;
+  background-color: grey;
+  color: #dcdcdc;
+  
+}
+
+tr:hover td {
+  background-color: #ef5c29;
   color: #2d5070;
 }
 
-tr:first-child {
-  color: purple;
+tr td:first-child {
+  color: #353535;
+  background-color: #ef5c29;
+}
+
+
+tr:hover td:first-child {
+  background-color: #2d5070;
+  color: white;
 }
 
 .salesTable article{

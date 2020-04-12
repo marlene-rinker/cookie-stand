@@ -43,7 +43,7 @@ header {
   color: #2d5070;
 }
 
-#addStoreForm {
+/* #addStoreForm {
   background-color: #facb61;
   padding: 50px;
   margin-left: auto;
@@ -51,7 +51,8 @@ header {
   border-width: 5px;
   border-color: #2d5070;
   border-style: solid;
-}
+} */
+
 
 label {
   color: #2d5070;
@@ -63,12 +64,12 @@ input {
 }
 
 table {
-  border: 1px solid black;
+  border: 1px solid #2d5070;
   border-collapse: collapse;
 }
 
 td, th {
-  border: black solid 1px;
+  border: #2d5070 solid 5px;
 }
 
 .warning {
@@ -94,19 +95,39 @@ main {
   background-color: transparent; 
   
 }
+.salesTable  {
+  background-color: #facb61;
+  margin-left: auto;
+  margin-right: auto;  
+  width: 1260px;
+  border-width: 5px;
+  border-color: #2d5070;
+  border-style: solid;
+  padding-bottom: 30px;
+}
+
+
 
 
 article {
   background-color: #facb61;
   margin-left: auto;
-  margin-right: auto;
-  width: 900px;
+  margin-right: auto;  
   text-align: center;
   border-width: 5px;
   border-color: #2d5070;
   border-style: solid;
   margin-top: 30px;
   padding:20px;
+}
+
+.salesTable article{
+  
+  width: 1046px;
+}
+
+.stores article {
+  width: 900px;
 }
 
 .stores article p {
@@ -133,6 +154,10 @@ article {
   border-width: 5px;
   border-radius: 10px;
 }
+
+
+
+
 
 footer {
   font: size 15;px;

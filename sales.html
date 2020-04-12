@@ -21,8 +21,7 @@
       </ul>
     </nav>
 
-    <p class = "warning">Under Construction</p>
-
+    
     <section class="salesTable">
     <article>
       
@@ -30,17 +29,25 @@
         <fieldset>
           <legend><h3>Add a Store</h3></legend>
 
-          <label for="location">Location</label>
-          <input type="text" name="location">
+          <div>
+            <label for="location">Location</label>
+            <input type="text" name="location">
+          </div>
 
-          <label for="minCustomers">Minimum Number of Customers Per Hour</label>
-          <input type="text" name="minCustomers">
+          <div>
+            <label for="minCustomers">Minimum Number of Customers Per Hour</label>
+            <input type="text" name="minCustomers">
+          </div>  
 
-          <label for="maxCustomers">Maximum Number of Customers Per Hour</label>
-          <input type="text" name="maxCustomers">
+          <div>
+            <label for="maxCustomers">Maximum Number of Customers Per Hour</label>
+            <input type="text" name="maxCustomers">
+          </div>
 
-          <label for="avgCookiesSold">Average Number of Cookies Purchased Per Customer Per Hour</label>
-          <input type="text" name=avgCookiesSold>
+          <div>
+            <label for="avgCookiesSold">Average Number of Cookies Purchased Per Customer Per Hour</label>
+            <input type="text" name=avgCookiesSold>
+          </div>
 
           <button type="submit">Add Store</button>
 
@@ -50,7 +57,7 @@
     </article>
       <article>
     
-      <h2>Sales Table</h2>
+      <h3>Sales Per Store Per Hour</h3>
       <table id="store-sales"></table>
     </article>
 

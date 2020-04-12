@@ -56,11 +56,39 @@ header {
 
 label {
   color: #2d5070;
-  
+  padding-right: 10px;
 }
 input {
   border-style: solid;
   border-color: #2d5070;
+  font-size: large;
+}
+
+button {
+  background-color: #2d5070;
+  color: white;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: #2d5070;
+  font-size: large;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: #ef5c29;
+}
+
+legend {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+form div {
+  height: 40px;
+  text-align: left;
+  font-size:large;
 }
 
 table {
@@ -69,7 +97,19 @@ table {
 }
 
 td, th {
-  border: #2d5070 solid 5px;
+  border: #2d5070 solid 3px;
+  text-align: center;
+  padding: 20px;
+  font-size: large;
+}
+
+th {
+  background-color: #dcdcdc;
+  color: #2d5070;
+}
+
+tr:first-child {
+  color: purple;
 }
 
 .warning {
@@ -93,13 +133,18 @@ h3 {
 main {
   background-image: url("images/fish.jpg");
   background-color: transparent; 
+  padding-bottom: 10px;
   
 }
 .salesTable  {
   background-color: #facb61;
   margin-left: auto;
   margin-right: auto;  
-  width: 1260px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  overflow: auto;
+  /* width: 1260px; */
+  width: 90%;
   border-width: 5px;
   border-color: #2d5070;
   border-style: solid;
@@ -123,8 +168,12 @@ article {
 
 .salesTable article{
   
-  width: 1046px;
+  /* width: 1046px; */
+  overflow: auto;
+  width: 90%;
+  
 }
+
 
 .stores article {
   width: 900px;

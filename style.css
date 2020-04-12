@@ -179,7 +179,9 @@ tr:hover td:first-child {
 }
 
 .stores article {
-  width: 900px;
+  /* width: 900px; */
+  width: 42%;
+  overflow: auto;
 }
 
 .stores article p {
